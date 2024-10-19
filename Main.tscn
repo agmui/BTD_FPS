@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://5sp78cj46wb2"]
+
+[ext_resource type="PackedScene" uid="uid://rwar35y3rexj" path="res://Player.tscn" id="1_qvl3j"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5etm"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_i3p3l"]
+sky_material = SubResource("ProceduralSkyMaterial_c5etm")
+
+[sub_resource type="Environment" id="Environment_xkawb"]
+background_mode = 2
+sky = SubResource("Sky_i3p3l")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_funih"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jbil2"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_crdpt"]
+size = Vector3(20, 10, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jmqqw"]
+size = Vector3(20, 10, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xkawb")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_funih")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_jbil2")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+mesh = SubResource("BoxMesh_crdpt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("BoxShape3D_jmqqw")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_qvl3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.852293, -0.324227, 0.410454, -0.523064, -0.528304, 0.668804, 0, -0.784711, -0.619861, 0, 20, 0)
+shadow_enabled = true
