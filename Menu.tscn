@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpfr5qs0k7hch"]
+
+[ext_resource type="Texture2D" uid="uid://pmfgut7vcvvg" path="res://monkey.png" id="1_h7t0d"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -539.0
+offset_right = 539.0
+offset_bottom = 1327.0
+grow_horizontal = 2
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -262.0
+offset_right = 262.0
+offset_bottom = 137.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 100
+text = "Bloons FPS"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -488.5
+offset_right = 6702.0
+offset_bottom = 5023.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+size_flags_vertical = 4
+texture = ExtResource("1_h7t0d")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_top = 1135.0
+offset_right = 1078.0
+offset_bottom = 1226.0
+
+[node name="JoinGameButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Join Game"
+
+[node name="HostGameButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Host Game"
+
+[node name="ExitButton" type="Button" parent="."]
+layout_mode = 2
+offset_top = 1236.0
+offset_right = 1078.0
+offset_bottom = 1327.0
+theme_override_font_sizes/font_size = 60
+text = "Exit"
