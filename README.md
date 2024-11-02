@@ -7,7 +7,7 @@ First person shooter game but BTD themed
 * game Map                          (Ethan)
 * FPS
   * Player Char                     (Anthony)
-    * PvP
+	* PvP
   * Balloons to as enemies/powers   (Balloon)
 * networking/multiplayer            (Anthony)
 * UI/Hud                            (Nathan)

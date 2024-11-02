@@ -9,6 +9,12 @@ const JUMP_VELOCITY = 4.5
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
 @export var CAMERA_CONTROLLER: Camera3D
 
+@onready var ray_cast = $Node3D/Camera3D/RayCast3D
+@onready var ShotFirerate = $ShotFirerate
+# bullets
+var bullet = load("res://bullet.tscn")
+var instance
+
 var _mouse_input: bool = false
 var _mouse_rotation: Vector3
 var _rotation_input: float
@@ -66,5 +72,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
+	# shooting bullets
+	if Input.is_action_pressed("shoot"):
+		if ShotFirerate.is_stopped():
+			ShotFirerate.start()
+			instance = bullet.instantiate()
+			instance.position = ray_cast.global_position
+			instance.transform.basis = ray_cast.global_transform.basis
+			get_parent().add_child(instance)
+	
 	move_and_slide()

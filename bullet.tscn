@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm3evodv3qf7d"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_my0yy"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7j858"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3ote"]
+albedo_color = Color(0.0846899, 0.0846899, 0.0846899, 1)
+emission_enabled = true
+emission = Color(0.647059, 0.188235, 0.188235, 1)
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_my0yy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_7j858")
+surface_material_override/0 = SubResource("StandardMaterial3D_s3ote")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
