@@ -1,65 +1,126 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpfr5qs0k7hch"]
+[gd_scene load_steps=3 format=3 uid="uid://dpfr5qs0k7hch"]
 
 [ext_resource type="Texture2D" uid="uid://pmfgut7vcvvg" path="res://monkey.png" id="1_h7t0d"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_u6yb2"]
 
-[node name="Menu" type="Control"]
-layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -539.0
-offset_right = 539.0
-offset_bottom = 1327.0
+[node name="Menu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_u6yb2")
 
-[node name="TitleLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -262.0
-offset_right = 262.0
-offset_bottom = 137.0
-grow_horizontal = 2
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+current_tab = 0
+tabs_visible = false
+
+[node name="Main" type="VBoxContainer" parent="TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+metadata/_tab_index = 0
+
+[node name="TitleLabel" type="Label" parent="TabContainer/Main"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
 theme_override_font_sizes/font_size = 100
 text = "Bloons FPS"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -488.5
-offset_right = 6702.0
-offset_bottom = 5023.5
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.2, 0.2)
-size_flags_vertical = 4
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="TabContainer/Main"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="monke" type="TextureRect" parent="TabContainer/Main/AspectRatioContainer"]
+layout_mode = 2
 texture = ExtResource("1_h7t0d")
+expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="GameButtons" type="HBoxContainer" parent="TabContainer/Main"]
 layout_mode = 2
-offset_top = 1135.0
-offset_right = 1078.0
-offset_bottom = 1226.0
+theme_override_constants/separation = 30
 
-[node name="JoinGameButton" type="Button" parent="HBoxContainer"]
+[node name="JoinGameButton" type="Button" parent="TabContainer/Main/GameButtons"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 60
 text = "Join Game"
 
-[node name="HostGameButton" type="Button" parent="HBoxContainer"]
+[node name="HostGameButton" type="Button" parent="TabContainer/Main/GameButtons"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 60
 text = "Host Game"
 
-[node name="ExitButton" type="Button" parent="."]
+[node name="ExitButton" type="Button" parent="TabContainer/Main"]
 layout_mode = 2
-offset_top = 1236.0
-offset_right = 1078.0
-offset_bottom = 1327.0
 theme_override_font_sizes/font_size = 60
 text = "Exit"
+
+[node name="Join" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="JoinLabel" type="Label" parent="TabContainer/Join"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -147.5
+offset_right = 147.5
+offset_bottom = 83.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 60
+text = "Join Game"
+horizontal_alignment = 1
+
+[node name="JoinBackButton" type="Button" parent="TabContainer/Join"]
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="Host" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="HostLabel" type="Label" parent="TabContainer/Host"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -157.0
+offset_right = 157.0
+offset_bottom = 83.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 60
+text = "Host Game"
+horizontal_alignment = 1
+
+[node name="HostBackButton" type="Button" parent="TabContainer/Host"]
+layout_mode = 1
+offset_right = 45.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[connection signal="pressed" from="TabContainer/Main/GameButtons/JoinGameButton" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="TabContainer/Main/GameButtons/HostGameButton" to="." method="_on_host_game_button_pressed"]
+[connection signal="pressed" from="TabContainer/Main/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="TabContainer/Join/JoinBackButton" to="." method="_on_join_back_button_pressed"]
+[connection signal="pressed" from="TabContainer/Host/HostBackButton" to="." method="_on_host_back_button_pressed"]
