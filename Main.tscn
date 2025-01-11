@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsb584mj3uyne"]
+[gd_scene load_steps=10 format=3 uid="uid://bsb584mj3uyne"]
 
 [ext_resource type="PackedScene" uid="uid://rwar35y3rexj" path="res://Player.tscn" id="1_qvl3j"]
+[ext_resource type="PackedScene" uid="uid://bit65w4tq6skv" path="res://HUD.tscn" id="2_c7dpn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5etm"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -55,3 +56,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 10)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.852293, -0.324227, 0.410454, -0.523064, -0.528304, 0.668804, 0, -0.784711, -0.619861, 0, 20, 0)
 shadow_enabled = true
+
+[node name="TextureRect2" parent="." instance=ExtResource("2_c7dpn")]
