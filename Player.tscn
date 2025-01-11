@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://rwar35y3rexj"]
+[gd_scene load_steps=7 format=3 uid="uid://rwar35y3rexj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_hnfhq"]
+[ext_resource type="PackedScene" uid="uid://bit65w4tq6skv" path="res://HUD.tscn" id="2_1kxma"]
+[ext_resource type="PackedScene" uid="uid://is5o40epns4c" path="res://pause_menu.tscn" id="3_rft7n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ob5dg"]
 
@@ -27,3 +29,8 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
+
+[node name="Control" parent="Node3D/Camera3D" instance=ExtResource("2_1kxma")]
+
+[node name="PauseMenu" parent="Node3D/Camera3D" instance=ExtResource("3_rft7n")]
+visible = false
