@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+signal health_changed
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -14,6 +15,10 @@ const JUMP_VELOCITY = 4.5
 # bullets
 var bullet = load("res://bullet.tscn")
 var instance
+@export var health = 100
+@export var ammo = 0
+
+@onready var hud = $Node3D/Camera3D/Control
 
 var _mouse_input: bool = false
 var _mouse_rotation: Vector3
@@ -24,7 +29,12 @@ var _camera_rotation: Vector3
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
-		get_tree().quit()
+		if $Node3D/Camera3D/PauseMenu.visible:
+			$Node3D/Camera3D/PauseMenu.hide()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		else:
+			$Node3D/Camera3D/PauseMenu.show()
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -32,6 +42,9 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input:
+		hud.update_health(1)
+		hud.update_ammo(ammo)
+		ammo += 1
 		_rotation_input = -event.relative.x * MOUSE_SENSITIVITY
 		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
 

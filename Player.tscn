@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://rwar35y3rexj"]
+[gd_scene load_steps=7 format=3 uid="uid://rwar35y3rexj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_hnfhq"]
+[ext_resource type="PackedScene" uid="uid://bit65w4tq6skv" path="res://HUD.tscn" id="2_1kxma"]
+[ext_resource type="PackedScene" uid="uid://is5o40epns4c" path="res://pause_menu.tscn" id="3_rft7n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ob5dg"]
 
@@ -17,7 +19,6 @@ script = ExtResource("1_hnfhq")
 CAMERA_CONTROLLER = NodePath("Node3D/Camera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape3D_ob5dg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
@@ -29,10 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 
-[node name="RayCast3D" type="RayCast3D" parent="Node3D/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.3, 0)
-target_position = Vector3(0, 0, -1)
+[node name="Control" parent="Node3D/Camera3D" instance=ExtResource("2_1kxma")]
 
-[node name="ShotFirerate" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
+[node name="PauseMenu" parent="Node3D/Camera3D" instance=ExtResource("3_rft7n")]
+visible = false
