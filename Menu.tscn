@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpfr5qs0k7hch"]
+[gd_scene load_steps=3 format=3 uid="uid://dfnfduwx4auag"]
 
 [ext_resource type="Texture2D" uid="uid://pmfgut7vcvvg" path="res://monkey.png" id="1_h7t0d"]
 [ext_resource type="Script" path="res://main_menu.gd" id="1_u6yb2"]
@@ -79,7 +79,7 @@ horizontal_alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/LAN"]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="TabContainer/LAN/VBoxContainer"]
+[node name="IPInputBox" type="LineEdit" parent="TabContainer/LAN/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "IP"

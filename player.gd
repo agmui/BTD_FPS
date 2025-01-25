@@ -24,7 +24,7 @@ var _mouse_input: bool = false
 var _mouse_rotation: Vector3
 var _rotation_input: float
 var _tilt_input: float
-var _player_rotation: Vector3
+var _player_rotation: Vector3 
 var _camera_rotation: Vector3
 
 func _input(event: InputEvent) -> void:

@@ -25,10 +25,15 @@ func _on_lan_pressed() -> void:
 
 func _on_host_button_pressed() -> void:
 	tab_container.current_tab = 2
+	Lobby.create_game()
+	
 
 
 func _on_join_button_pressed() -> void:
 	tab_container.current_tab = 2
+	Lobby.join_game($TabContainer/LAN/VBoxContainer/IPInputBox.text)
+	Lobby.player_loaded.rpc_id(1) # Tell the server that this peer has loaded.
+
 
 
 func _on_lan_back_button_pressed() -> void:

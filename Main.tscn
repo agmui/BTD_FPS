@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsb584mj3uyne"]
+[gd_scene load_steps=10 format=3 uid="uid://bsb584mj3uyne"]
 
-[ext_resource type="PackedScene" uid="uid://rwar35y3rexj" path="res://Player.tscn" id="1_qvl3j"]
+[ext_resource type="Script" path="res://main.gd" id="1_hnrvu"]
+[ext_resource type="PackedScene" uid="uid://dfnfduwx4auag" path="res://Menu.tscn" id="2_q1t6c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c5etm"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -27,7 +28,8 @@ size = Vector3(20, 10, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_jmqqw"]
 size = Vector3(20, 10, 1)
 
-[node name="Node3D" type="Node3D"]
+[node name="Game" type="Node3D"]
+script = ExtResource("1_hnrvu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xkawb")
@@ -49,9 +51,14 @@ mesh = SubResource("BoxMesh_crdpt")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
 shape = SubResource("BoxShape3D_jmqqw")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_qvl3j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 10)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.852293, -0.324227, 0.410454, -0.523064, -0.528304, 0.668804, 0, -0.784711, -0.619861, 0, 20, 0)
 shadow_enabled = true
+
+[node name="Network" type="Node" parent="."]
+
+[node name="Menu" parent="." instance=ExtResource("2_q1t6c")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Player.tscn", "res://bullet.tscn")
+spawn_path = NodePath("../Network")
