@@ -23,7 +23,7 @@ var player_info = {"name": "Name"}
 
 var players_loaded = 0
 
-
+signal add_new_username(username: String)
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
@@ -32,7 +32,7 @@ func _ready():
 	multiplayer.connection_failed.connect(_on_connected_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
-
+# client side
 func join_game(address = ""):
 	if address.is_empty():
 		address = DEFAULT_SERVER_IP
@@ -42,7 +42,7 @@ func join_game(address = ""):
 		return error
 	multiplayer.multiplayer_peer = peer
 
-
+# server side
 func create_game():
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
@@ -56,6 +56,7 @@ func create_game():
 
 func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
+	#TODO: update Menu list
 
 
 # When the server decides to start the game from a UI scene,
@@ -68,6 +69,7 @@ func load_game(game_scene_path):
 # Every peer will call this when they have loaded the game scene.
 @rpc("any_peer", "call_local", "reliable")
 func player_loaded():
+	print("called player_loaded")
 	if multiplayer.is_server():
 		players_loaded += 1
 		if players_loaded == players.size():
@@ -88,12 +90,13 @@ func _register_player(new_player_info):
 	players[new_player_id] = new_player_info
 	player_connected.emit(new_player_id, new_player_info)
 	print("[client] player: ", new_player_id, " joined")
-
+	add_new_username.emit(str(new_player_id))
 
 
 func _on_player_disconnected(id):
 	players.erase(id)
 	player_disconnected.emit(id)
+	#TODO: update Menu list
 
 
 func _on_connected_ok():

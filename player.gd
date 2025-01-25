@@ -38,6 +38,10 @@ func _input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	set_pos(Vector3(10,10, 10))
+
+func set_pos(pos: Vector3):
+	position = pos
 
 func _unhandled_input(event: InputEvent) -> void:
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED

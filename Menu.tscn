@@ -120,20 +120,17 @@ layout_mode = 2
 size_flags_vertical = 3
 split_offset = 860
 
-[node name="PlayerList" type="VBoxContainer" parent="TabContainer/Lobby/HSplitContainer"]
+[node name="PlayerViewer" type="VBoxContainer" parent="TabContainer/Lobby/HSplitContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/Lobby/HSplitContainer/PlayerList"]
+[node name="Label" type="Label" parent="TabContainer/Lobby/HSplitContainer/PlayerViewer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Player List"
 
-[node name="ItemList" type="ItemList" parent="TabContainer/Lobby/HSplitContainer/PlayerList"]
+[node name="PlayerList" type="ItemList" parent="TabContainer/Lobby/HSplitContainer/PlayerViewer"]
 layout_mode = 2
 size_flags_vertical = 3
-item_count = 2
-item_0/text = "test"
-item_1/text = "Test2"
 
 [node name="PlayerOptions" type="VBoxContainer" parent="TabContainer/Lobby/HSplitContainer"]
 layout_mode = 2
@@ -204,6 +201,7 @@ text = "Local (LAN)"
 [connection signal="pressed" from="TabContainer/LAN/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="TabContainer/LAN/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="TabContainer/Lobby/HBoxContainer/LobbyBackButton" to="." method="_on_lobby_back_button_pressed"]
+[connection signal="pressed" from="TabContainer/Lobby/HSplitContainer/PlayerOptions/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="TabContainer/EnterName/TitleContainer/EnterNameBackButton" to="." method="_on_enter_name_back_button_pressed"]
 [connection signal="pressed" from="TabContainer/EnterName/NameInputContainer/Server" to="." method="_on_server_pressed"]
 [connection signal="pressed" from="TabContainer/EnterName/NameInputContainer/LAN" to="." method="_on_lan_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://rwar35y3rexj"]
+[gd_scene load_steps=8 format=3 uid="uid://rwar35y3rexj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_hnfhq"]
 [ext_resource type="PackedScene" path="res://HUD.tscn" id="2_1kxma"]
@@ -13,6 +13,8 @@ ao_light_affect = 1.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_clk3u"]
 material = SubResource("StandardMaterial3D_ten6w")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jgmrv"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER")]
 script = ExtResource("1_hnfhq")
@@ -34,3 +36,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="PauseMenu" parent="Node3D/Camera3D" instance=ExtResource("3_rft7n")]
 visible = false
+
+[node name="RayCast3D" type="RayCast3D" parent="Node3D/Camera3D"]
+
+[node name="ShotFirerate" type="Timer" parent="."]
+wait_time = 0.106
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jgmrv")
