@@ -43,7 +43,7 @@ func join_game(address = ""):
 	multiplayer.multiplayer_peer = peer
 
 
-func create_game():
+func host_game():
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
 	if error:
@@ -71,7 +71,7 @@ func player_loaded():
 	if multiplayer.is_server():
 		players_loaded += 1
 		if players_loaded == players.size():
-			$/root/Game.start_game()
+			$/root/Map.start_game()
 			players_loaded = 0
 
 

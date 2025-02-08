@@ -19,6 +19,7 @@ var instance
 @export var ammo = 0
 
 @onready var hud = $Node3D/Camera3D/Control
+@onready var cam = $Node3D/Camera3D
 
 var _mouse_input: bool = false
 var _mouse_rotation: Vector3
@@ -35,9 +36,16 @@ func _input(event: InputEvent) -> void:
 		else:
 			$Node3D/Camera3D/PauseMenu.show()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	cam.current = is_multiplayer_authority()
+	
+	
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
@@ -65,6 +73,9 @@ func _update_camera(delta):
 	_tilt_input = 0.0
 
 func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority():
+		return
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta

@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://rwar35y3rexj"]
+[gd_scene load_steps=9 format=3 uid="uid://rwar35y3rexj"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_hnfhq"]
-[ext_resource type="PackedScene" path="res://HUD.tscn" id="2_1kxma"]
-[ext_resource type="PackedScene" path="res://pause_menu.tscn" id="3_rft7n"]
+[ext_resource type="PackedScene" uid="uid://bit65w4tq6skv" path="res://HUD.tscn" id="2_1kxma"]
+[ext_resource type="PackedScene" uid="uid://is5o40epns4c" path="res://pause_menu.tscn" id="3_rft7n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ob5dg"]
 
@@ -13,6 +13,19 @@ ao_light_affect = 1.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_clk3u"]
 material = SubResource("StandardMaterial3D_ten6w")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_t84kp"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yl6wd"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
 
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER")]
 script = ExtResource("1_hnfhq")
@@ -34,3 +47,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="PauseMenu" parent="Node3D/Camera3D" instance=ExtResource("3_rft7n")]
 visible = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_t84kp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.815616)
+mesh = SubResource("CylinderMesh_yl6wd")

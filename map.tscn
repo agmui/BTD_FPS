@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://c162j7unfh12y"]
+
+[ext_resource type="Script" path="res://map.gd" id="1_ejor3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w5s13"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_i3p3l"]
+sky_material = SubResource("ProceduralSkyMaterial_w5s13")
+
+[sub_resource type="Environment" id="Environment_fkf0m"]
+background_mode = 2
+sky = SubResource("Sky_i3p3l")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_gsl2v"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fi41p"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p4jg1"]
+size = Vector3(20, 10, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kghf1"]
+size = Vector3(20, 10, 1)
+
+[node name="Map" type="Node3D"]
+script = ExtResource("1_ejor3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fkf0m")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_gsl2v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_fi41p")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+mesh = SubResource("BoxMesh_p4jg1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("BoxShape3D_kghf1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.852293, -0.324227, 0.410454, -0.523064, -0.528304, 0.668804, 0, -0.784711, -0.619861, 0, 20, 0)
+shadow_enabled = true
+
+[node name="Network" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Player.tscn", "res://bullet.tscn")
+spawn_path = NodePath("../Network")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfnfduwx4auag"]
+[gd_scene load_steps=3 format=3 uid="uid://bi6abjyhsjewa"]
 
 [ext_resource type="Texture2D" uid="uid://pmfgut7vcvvg" path="res://monkey.png" id="1_h7t0d"]
 [ext_resource type="Script" path="res://main_menu.gd" id="1_u6yb2"]
@@ -131,9 +131,6 @@ text = "Player List"
 [node name="ItemList" type="ItemList" parent="TabContainer/Lobby/HSplitContainer/PlayerList"]
 layout_mode = 2
 size_flags_vertical = 3
-item_count = 2
-item_0/text = "test"
-item_1/text = "Test2"
 
 [node name="PlayerOptions" type="VBoxContainer" parent="TabContainer/Lobby/HSplitContainer"]
 layout_mode = 2
@@ -204,6 +201,7 @@ text = "Local (LAN)"
 [connection signal="pressed" from="TabContainer/LAN/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="TabContainer/LAN/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="TabContainer/Lobby/HBoxContainer/LobbyBackButton" to="." method="_on_lobby_back_button_pressed"]
+[connection signal="pressed" from="TabContainer/Lobby/HSplitContainer/PlayerOptions/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="TabContainer/EnterName/TitleContainer/EnterNameBackButton" to="." method="_on_enter_name_back_button_pressed"]
 [connection signal="pressed" from="TabContainer/EnterName/NameInputContainer/Server" to="." method="_on_server_pressed"]
 [connection signal="pressed" from="TabContainer/EnterName/NameInputContainer/LAN" to="." method="_on_lan_pressed"]
